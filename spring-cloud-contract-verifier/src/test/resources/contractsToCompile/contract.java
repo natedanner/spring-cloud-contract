@@ -29,18 +29,16 @@ class contract implements Supplier<Collection<Contract>> {
 		return Collections.singletonList(Contract.make(c -> {
 			c.request(r -> {
 				r.method(r.PUT());
-				r.headers(h -> {
-					h.contentType(h.applicationJson());
-				});
+				r.headers(h ->
+					h.contentType(h.applicationJson()));
 				r.body(" { \"status\" : \"OK\" } ");
 				r.url("/1");
 			});
 			c.response(r -> {
 				r.status(r.OK());
 				r.body(" { \"status\" : \"OK\" } ");
-				r.headers(h -> {
-					h.contentType(h.textPlain());
-				});
+				r.headers(h ->
+					h.contentType(h.textPlain()));
 			});
 		}));
 	}

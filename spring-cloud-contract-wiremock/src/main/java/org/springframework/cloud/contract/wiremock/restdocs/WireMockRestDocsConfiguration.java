@@ -45,7 +45,7 @@ public class WireMockRestDocsConfiguration implements RestDocsMockMvcConfigurati
 
 	@Override
 	public void customize(MockMvcRestDocumentationConfigurer configurer) {
-		if (this.environment.getProperty("wiremock.placeholders.enabled", "true").equals("true")) {
+		if ("true".equals(this.environment.getProperty("wiremock.placeholders.enabled", "true"))) {
 			configurer.operationPreprocessors().withResponseDefaults(new DynamicPortPlaceholderInserterPreprocessor());
 		}
 		configurer.snippets().withAdditionalDefaults(new WireMockSnippet());

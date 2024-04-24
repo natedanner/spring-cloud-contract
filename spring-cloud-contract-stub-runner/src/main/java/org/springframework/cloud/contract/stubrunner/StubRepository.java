@@ -106,7 +106,7 @@ class StubRepository {
 	}
 
 	private List<File> collectedStubs() {
-		return this.path.exists() ? collectMappings(this.path) : Collections.<File>emptyList();
+		return this.path.exists() ? collectMappings(this.path) : Collections.emptyList();
 	}
 
 	private List<File> collectMappings(File descriptorsDirectory) {
@@ -149,9 +149,9 @@ class StubRepository {
 	}
 
 	private Collection<Contract> contractDescriptors() {
-		return (this.path.exists()
+		return this.path.exists()
 				? ContractScanner.collectContractDescriptors(this.path, this::isStubPerConsumerPathMatching)
-				: Collections.<Contract>emptySet());
+				: Collections.<Contract>emptySet();
 	}
 
 	private boolean isStubPerConsumerPathMatching(File file) {

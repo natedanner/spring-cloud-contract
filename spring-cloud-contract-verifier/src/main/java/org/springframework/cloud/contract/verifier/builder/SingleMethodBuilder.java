@@ -34,23 +34,23 @@ import org.springframework.cloud.contract.verifier.file.SingleContractMetadata;
  * @author Marcin Grzejszczak
  * @since 2.2.0
  */
-class SingleMethodBuilder {
+final class SingleMethodBuilder {
 
 	private static final Log log = LogFactory.getLog(SingleMethodBuilder.class);
 
-	private List<MethodAnnotations> methodAnnotations = new LinkedList<>();
+	private final List<MethodAnnotations> methodAnnotations = new LinkedList<>();
 
-	private List<MethodMetadata> methodMetadata = new LinkedList<>();
+	private final List<MethodMetadata> methodMetadata = new LinkedList<>();
 
-	private List<MethodPreProcessor> methodPreProcessors = new LinkedList<>();
+	private final List<MethodPreProcessor> methodPreProcessors = new LinkedList<>();
 
-	private List<MethodPostProcessor> methodPostProcessors = new LinkedList<>();
+	private final List<MethodPostProcessor> methodPostProcessors = new LinkedList<>();
 
-	private List<Given> givens = new LinkedList<>();
+	private final List<Given> givens = new LinkedList<>();
 
-	private List<When> whens = new LinkedList<>();
+	private final List<When> whens = new LinkedList<>();
 
-	private List<Then> thens = new LinkedList<>();
+	private final List<Then> thens = new LinkedList<>();
 
 	final GeneratedClassMetaData generatedClassMetaData;
 

@@ -151,14 +151,14 @@ class NamesUtilSpec extends Specification {
 		when:
 			NamesUtil.recrusiveDirectoryToPackage(tmp)
 		then:
-			new File(tmp, "META-INF/1_0_0_SNAPSHOT").exists() == false
-			new File(tmp, "META-INF/2_0_0_SNAPSHOT").exists() == false
-			new File(tmp, "META-INF/1_0_0_SNAPSHOT/3_0_0_SNAPSHOT").exists() == false
-			new File(tmp, "META-INF/_1_0_0_SNAPSHOT").exists() == true
-			new File(tmp, "META-INF/_2_0_0_SNAPSHOT").exists() == true
-			new File(tmp, "META-INF/_1_0_0_SNAPSHOT/_3_0_0_SNAPSHOT").exists() == true
-			new File(tmp, "META-INF/_1_0_0_SNAPSHOT/normal").exists() == true
-			new File(tmp, "META-INF/_1_0_0_SNAPSHOT/_3_0_0_SNAPSHOT/normal").exists() == true
+			!new File(tmp, "META-INF/1_0_0_SNAPSHOT").exists()
+			!new File(tmp, "META-INF/2_0_0_SNAPSHOT").exists()
+			!new File(tmp, "META-INF/1_0_0_SNAPSHOT/3_0_0_SNAPSHOT").exists()
+			new File(tmp, "META-INF/_1_0_0_SNAPSHOT").exists()
+			new File(tmp, "META-INF/_2_0_0_SNAPSHOT").exists()
+			new File(tmp, "META-INF/_1_0_0_SNAPSHOT/_3_0_0_SNAPSHOT").exists()
+			new File(tmp, "META-INF/_1_0_0_SNAPSHOT/normal").exists()
+			new File(tmp, "META-INF/_1_0_0_SNAPSHOT/_3_0_0_SNAPSHOT/normal").exists()
 	}
 
 	def "should not throw exception if folder does not exist"() {

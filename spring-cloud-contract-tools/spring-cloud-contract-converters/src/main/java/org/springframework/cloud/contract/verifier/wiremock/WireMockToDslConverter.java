@@ -202,14 +202,14 @@ public class WireMockToDslConverter {
 			Iterator<JsonNode> elements = requestBodyArrayNode.elements();
 			Iterable<JsonNode> iterableFields = () -> elements;
 			List<Map.Entry<String, JsonNode>> requestBodyObjectNodes = new ArrayList<>();
-			StreamSupport.stream(iterableFields.spliterator(), false).filter(f -> f instanceof ObjectNode)
-					.map(f -> (ObjectNode) f).map(ObjectNode::fields)
+			StreamSupport.stream(iterableFields.spliterator(), false).filter(ObjectNode.class::isInstance)
+					.map(ObjectNode.class::cast).map(ObjectNode::fields)
 					.forEachOrdered(i -> i.forEachRemaining(requestBodyObjectNodes::add));
-			requestBodyObjectNodes.stream().filter(b -> b.getKey().equals("equalTo")).findFirst()
+			requestBodyObjectNodes.stream().filter(b -> "equalTo".equals(b.getKey())).findFirst()
 					.ifPresent(b -> requestBody.append("body ('").append(b.getValue().asText()).append("')"));
-			requestBodyObjectNodes.stream().filter(b -> b.getKey().equals("equalToJson")).findFirst()
+			requestBodyObjectNodes.stream().filter(b -> "equalToJson".equals(b.getKey())).findFirst()
 					.ifPresent(b -> requestBody.append("body ('").append(b.getValue().asText()).append("')"));
-			requestBodyObjectNodes.stream().filter(b -> b.getKey().equals("matches")).findFirst()
+			requestBodyObjectNodes.stream().filter(b -> "matches".equals(b.getKey())).findFirst()
 					.ifPresent(b -> requestBody.append("body $(consumer(regex('")
 							.append(escapeJava(b.getValue().asText())).append("')), producer('")
 							.append(new Xeger(escapeJava(b.getValue().asText())).generate()).append("'))"));

@@ -53,7 +53,7 @@ public class Multipart extends DslProperty {
 	}
 
 	private static Map<String, Object> extractValue(Map<String, DslProperty> multipart, final Function valueProvider) {
-		final Map<String, Object> map = new LinkedHashMap<String, Object>();
+		final Map<String, Object> map = new LinkedHashMap<>();
 		multipart.forEach((s, dslProperty) -> map.put(s, valueProvider.apply(dslProperty)));
 		return map;
 	}

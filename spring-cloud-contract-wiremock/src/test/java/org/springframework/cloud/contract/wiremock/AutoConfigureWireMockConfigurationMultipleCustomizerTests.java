@@ -48,9 +48,9 @@ public class AutoConfigureWireMockConfigurationMultipleCustomizerTests {
 	@Configuration
 	protected static class Config {
 
-		boolean executedCustomizer1 = false;
+		boolean executedCustomizer1;
 
-		boolean executedCustomizer2 = false;
+		boolean executedCustomizer2;
 
 		@Bean
 		WireMockConfigurationCustomizer optionsCustomizer1() {

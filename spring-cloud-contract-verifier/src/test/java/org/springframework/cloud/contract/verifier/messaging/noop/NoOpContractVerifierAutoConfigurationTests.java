@@ -28,14 +28,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class NoOpContractVerifierAutoConfigurationTests {
 
-	private ApplicationContextRunner contextRunner = new ApplicationContextRunner()
+	private final ApplicationContextRunner contextRunner = new ApplicationContextRunner()
 			.withConfiguration(AutoConfigurations.of(NoOpContractVerifierAutoConfiguration.class));
 
 	@Test
 	public void shouldCreateBeansByDefault() {
-		this.contextRunner.run((context) -> {
-			assertThat(context.getBeansOfType(NoOpStubMessages.class)).hasSize(1);
-		});
+		this.contextRunner.run(context ->
+			assertThat(context.getBeansOfType(NoOpStubMessages.class)).hasSize(1));
 	}
 
 }

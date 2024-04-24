@@ -23,11 +23,11 @@ package org.springframework.cloud.contract.stubrunner;
  */
 class Arguments {
 
-	final private StubRunnerOptions stubRunnerOptions;
+	private final StubRunnerOptions stubRunnerOptions;
 
-	final private String repositoryPath;
+	private final String repositoryPath;
 
-	final private StubConfiguration stub;
+	private final StubConfiguration stub;
 
 	Arguments(StubRunnerOptions stubRunnerOptions) {
 		this(stubRunnerOptions, "", null);

@@ -58,7 +58,7 @@ class BasicMappingBuilder implements ScenarioMappingBuilder {
 
 	private String name;
 
-	private boolean isPersistent = false;
+	private boolean isPersistent;
 
 	private Map<String, Parameters> postServeActions = new LinkedHashMap<>();
 

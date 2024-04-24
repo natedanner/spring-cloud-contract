@@ -24,7 +24,7 @@ import java.util.Objects;
 
 public class QueryParameters {
 
-	private List<QueryParameter> parameters = new LinkedList<QueryParameter>();
+	private List<QueryParameter> parameters = new LinkedList<>();
 
 	public void parameter(Map<String, Object> singleParameter) {
 		Iterator<Map.Entry<String, Object>> iterator = singleParameter.entrySet().iterator();

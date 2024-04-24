@@ -60,7 +60,7 @@ public class RegexProperty extends DslProperty implements CanBeDynamic {
 			this.clazz = clazz != null ? clazz : String.class;
 		}
 		else if (dynamicValue instanceof RegexProperty) {
-			RegexProperty regexProperty = ((RegexProperty) dynamicValue);
+			RegexProperty regexProperty = (RegexProperty) dynamicValue;
 			this.pattern = regexProperty.pattern;
 			this.clazz = clazz != null ? clazz : regexProperty.clazz;
 		}

@@ -80,9 +80,9 @@ public class WireMockSnippet implements Snippet {
 		}
 	};
 
-	private String snippetName = "stubs";
+	private final String snippetName = "stubs";
 
-	private Set<String> headerBlackList = new HashSet<>(Arrays.asList("host", "content-length"));
+	private final Set<String> headerBlackList = new HashSet<>(Arrays.asList("host", "content-length"));
 
 	private Set<String> jsonPaths = new LinkedHashSet<>();
 
@@ -90,9 +90,9 @@ public class WireMockSnippet implements Snippet {
 
 	private StubMapping stubMapping;
 
-	private boolean hasJsonBodyRequestToMatch = false;
+	private boolean hasJsonBodyRequestToMatch;
 
-	private boolean hasXmlBodyRequestToMatch = false;
+	private boolean hasXmlBodyRequestToMatch;
 
 	@Override
 	public void document(Operation operation) throws IOException {
@@ -217,7 +217,7 @@ public class WireMockSnippet implements Snippet {
 				builder.withRequestBody(matchingJsonPath(jsonPath));
 			}
 		}
-		else if (!!StringUtils.hasText(content)) {
+		else if (StringUtils.hasText(content)) {
 			if (this.hasJsonBodyRequestToMatch) {
 				builder.withRequestBody(equalToJson(content));
 			}

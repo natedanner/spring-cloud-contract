@@ -165,7 +165,7 @@ class DelegatingJsonVerifiable implements MethodBufferingJsonVerifiable {
 	public MethodBufferingJsonVerifiable isEqualTo(String value) {
 		DelegatingJsonVerifiable readyToCheck = new FinishedDelegatingJsonVerifiable(this.delegate.jsonPath(),
 				this.delegate.isEqualTo(value), this.methodsBuffer, value);
-		if (this.delegate.isAssertingAValueInArray() && readyToCheck.methodsBuffer.peekLast().equals(".arrayField()")) {
+		if (this.delegate.isAssertingAValueInArray() && ".arrayField()".equals(readyToCheck.methodsBuffer.peekLast())) {
 			readyToCheck.appendMethodWithQuotedValue("isEqualTo", escapedHackedJavaText(value));
 			readyToCheck.methodsBuffer.offer(".value()");
 		}

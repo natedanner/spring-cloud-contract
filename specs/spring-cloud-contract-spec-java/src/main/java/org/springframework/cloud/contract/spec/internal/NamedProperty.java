@@ -69,7 +69,7 @@ public class NamedProperty {
 		}
 
 		if (o instanceof DslProperty) {
-			return ((DslProperty) (o));
+			return (DslProperty) (o);
 		}
 
 		return new DslProperty(o);

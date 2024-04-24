@@ -55,7 +55,7 @@ public final class ContractScanner {
 	 * @return collection of converted contracts
 	 */
 	public static Collection<Contract> collectContractDescriptors(File rootDirectory) {
-		return collectContractDescriptors(rootDirectory, (file) -> true);
+		return collectContractDescriptors(rootDirectory, file -> true);
 	}
 
 	/**

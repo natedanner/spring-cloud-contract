@@ -67,7 +67,7 @@ public class Request {
 	 * @return content type from headers
 	 */
 	public String contentType() {
-		Object value = this.headers.entrySet().stream().filter(e -> e.getKey().toLowerCase().equals("content-type"))
+		Object value = this.headers.entrySet().stream().filter(e -> "content-type".equals(e.getKey().toLowerCase()))
 				.findFirst().orElse(new AbstractMap.SimpleEntry<>("", null)).getValue();
 		if (value == null) {
 			return null;

@@ -32,21 +32,19 @@ class contract_rest implements Supplier<Collection<Contract>> {
 			c.priority(8);
 			c.ignored();
 			c.request(r -> {
-				r.url("/foo", u -> {
+				r.url("/foo", u ->
 					u.queryParameters(q -> {
 						q.parameter("a", "b");
 						q.parameter("b", "c");
-					});
-				});
+					}));
 				r.method(r.PUT());
 				r.headers(h -> {
 					h.header("foo", r.value(r.client(r.regex("bar")), r.server("bar")));
 					h.header("fooReq", "baz");
 				});
 				r.body(ContractVerifierUtil.map().entry("foo", "bar"));
-				r.bodyMatchers(m -> {
-					m.jsonPath("$.foo", m.byRegex("bar"));
-				});
+				r.bodyMatchers(m ->
+					m.jsonPath("$.foo", m.byRegex("bar")));
 			});
 			c.response(r -> {
 				r.fixedDelayMilliseconds(1000);

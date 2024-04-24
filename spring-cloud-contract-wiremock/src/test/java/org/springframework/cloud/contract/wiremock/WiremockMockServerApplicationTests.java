@@ -34,7 +34,7 @@ import static org.assertj.core.api.Assertions.fail;
 
 public class WiremockMockServerApplicationTests {
 
-	private RestTemplate restTemplate = new RestTemplate();
+	private final RestTemplate restTemplate = new RestTemplate();
 
 	@Test
 	public void simpleGet() throws Exception {

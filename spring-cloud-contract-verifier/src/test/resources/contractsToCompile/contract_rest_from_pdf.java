@@ -30,16 +30,14 @@ class contract_rest_from_pdf implements Supplier<Collection<Contract>> {
 				r.url("/1");
 				r.method(r.PUT());
 				r.body(r.fileAsBytes("request.pdf"));
-				r.headers(h -> {
-					h.contentType(h.applicationOctetStream());
-				});
+				r.headers(h ->
+					h.contentType(h.applicationOctetStream()));
 			});
 			c.response(r -> {
 				r.status(r.OK());
 				r.body(r.fileAsBytes("response.pdf"));
-				r.headers(h -> {
-					h.contentType(h.applicationOctetStream());
-				});
+				r.headers(h ->
+					h.contentType(h.applicationOctetStream()));
 			});
 		}));
 	}

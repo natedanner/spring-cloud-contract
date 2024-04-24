@@ -29,15 +29,15 @@ import java.util.stream.Collectors;
  * @author Marcin Grzejszczak
  * @since 2.2.0
  */
-class GeneratedTestClassBuilder {
+final class GeneratedTestClassBuilder {
 
-	private List<ClassMetaData> metaData = new LinkedList<>();
+	private final List<ClassMetaData> metaData = new LinkedList<>();
 
-	private List<Imports> imports = new LinkedList<>();
+	private final List<Imports> imports = new LinkedList<>();
 
-	private List<Imports> staticImports = new LinkedList<>();
+	private final List<Imports> staticImports = new LinkedList<>();
 
-	private List<ClassAnnotation> annotations = new LinkedList<>();
+	private final List<ClassAnnotation> annotations = new LinkedList<>();
 
 	private ClassBodyBuilder classBodyBuilder;
 

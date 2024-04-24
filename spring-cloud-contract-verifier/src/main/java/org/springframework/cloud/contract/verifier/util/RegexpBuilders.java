@@ -40,7 +40,7 @@ import static org.springframework.cloud.contract.verifier.util.ContentUtils.extr
  */
 public final class RegexpBuilders {
 
-	private final static String WS = "/\\s*/";
+	private static final String WS = "/\\s*/";
 
 	private static final Function<DslProperty<?>, Object> CLIENT_VALUE_EXTRACTOR = DslProperty::getClientValue;
 
@@ -70,7 +70,7 @@ public final class RegexpBuilders {
 	 */
 	static String buildGStringRegexpForStubSide(GString gString) {
 		return new GStringImpl(
-				Stream.of(gString.getValues()).map(RegexpBuilders::buildGStringRegexpForStubSide).map(s -> (Object) s)
+				Stream.of(gString.getValues()).map(RegexpBuilders::buildGStringRegexpForStubSide).map(Object.class::cast)
 						.toArray(),
 				Stream.of(gString.getStrings()).map(RegexpBuilders::escapeSpecialRegexChars).toArray(String[]::new))
 						.toString();
@@ -98,7 +98,7 @@ public final class RegexpBuilders {
 	 */
 	public static String buildGStringRegexpForTestSide(GString gString) {
 		return new GStringImpl(
-				Stream.of(gString.getValues()).map(RegexpBuilders::buildGStringRegexpForTestSide).map(s -> (Object) s)
+				Stream.of(gString.getValues()).map(RegexpBuilders::buildGStringRegexpForTestSide).map(Object.class::cast)
 						.toArray(),
 				Stream.of(gString.getStrings()).map(RegexpBuilders::escapeSpecialRegexChars).toArray(String[]::new))
 						.toString();

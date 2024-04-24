@@ -22,7 +22,7 @@ class ReadyToCheckAsserter extends XmlAsserter {
 
 	ReadyToCheckAsserter(XmlCachedObjects cachedObjects, LinkedList<String> xPathBuffer, Object fieldName,
 			XmlAsserterConfiguration xmlAsserterConfiguration) {
-		super(cachedObjects, xPathBuffer, new LinkedList<String>(), fieldName, xmlAsserterConfiguration);
+		super(cachedObjects, xPathBuffer, new LinkedList<>(), fieldName, xmlAsserterConfiguration);
 	}
 
 	@Override

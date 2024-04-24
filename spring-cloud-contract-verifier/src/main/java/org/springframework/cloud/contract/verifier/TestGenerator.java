@@ -189,7 +189,7 @@ public class TestGenerator {
 	protected static String buildPackage(final String packageNameForClass, final String includedDirectoryRelativePath) {
 		String directory = beforeLast(includedDirectoryRelativePath, File.separator);
 		String convertedPackage = packageNameForClass + "." + directoryToPackage(convertIllegalPackageChars(directory));
-		return !directory.isEmpty() ? convertedPackage : packageNameForClass;
+		return directory.isEmpty() ? packageNameForClass : convertedPackage;
 	}
 
 }

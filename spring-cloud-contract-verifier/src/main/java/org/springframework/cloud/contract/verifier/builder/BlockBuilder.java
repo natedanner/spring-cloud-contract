@@ -216,15 +216,15 @@ public class BlockBuilder {
 	}
 
 	private boolean endsWithNewLine(String character) {
-		return character.equals("\n");
+		return "\n".equals(character);
 	}
 
 	private boolean aSpecialSign(String character, String toAdd) {
 		if (StringUtils.isEmpty(character)) {
 			return false;
 		}
-		return character.equals("{") || (character.equals(spacer) && toAdd.equals(spacer))
-				|| (character.equals(spacer) && toAdd.equals(" ")) || character.equals(toAdd)
+		return "{".equals(character) || (character.equals(spacer) && toAdd.equals(spacer))
+				|| (character.equals(spacer) && " ".equals(toAdd)) || character.equals(toAdd)
 				|| (endsWithNewLine(character) && StringUtils.equalsAny(toAdd, "\n", " ", lineEnding));
 	}
 

@@ -28,15 +28,13 @@ class contract_xml implements Supplier<Contract> {
 			c.request(r -> {
 				r.method(r.GET());
 				r.urlPath("/get");
-				r.headers(h -> {
-					h.contentType(h.applicationXml());
-				});
+				r.headers(h ->
+					h.contentType(h.applicationXml()));
 			});
 			c.response(r -> {
 				r.status(r.OK());
-				r.headers(h -> {
-					h.contentType(h.applicationXml());
-				});
+				r.headers(h ->
+					h.contentType(h.applicationXml()));
 				r.body("<test>\n" + "<duck type='xtype'>123</duck>\n" + "<alpha>abc</alpha>\n" + "<list>\n"
 						+ "<elem>abc</elem>\n" + "<elem>def</elem>\n" + "<elem>ghi</elem>\n" + "</list>\n"
 						+ "<number>123</number>\n" + "<aBoolean>true</aBoolean>\n" + "<date>2017-01-01</date>\n"

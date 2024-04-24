@@ -106,7 +106,7 @@ class YamlToContracts {
 		Thread.currentThread().setContextClassLoader(updatedClassLoader(contractFile.getParentFile(), classLoader));
 		List<Contract> contracts = new ArrayList<>();
 		for (YamlContract yamlContract : yamlContracts) {
-			Contract contract = Contract.make((dslContract) -> {
+			Contract contract = Contract.make(dslContract -> {
 				mapDescription(yamlContract, dslContract);
 				mapLabel(yamlContract, dslContract);
 				mapName(counter, contractFile, yamlContracts, yamlContract, dslContract);
@@ -169,7 +169,7 @@ class YamlToContracts {
 	private void mapRequest(YamlContract yamlContract, Contract dslContract) {
 		YamlContract.Request yamlContractRequest = yamlContract.request;
 		if (yamlContractRequest != null) {
-			dslContract.request((dslContractRequest) -> {
+			dslContract.request(dslContractRequest -> {
 				mapRequestMethod(yamlContractRequest, dslContractRequest);
 				mapRequestUrl(yamlContract, dslContractRequest);
 				mapRequestUrlPath(yamlContract, dslContractRequest);
@@ -225,9 +225,9 @@ class YamlToContracts {
 	private void mapRequestHeaders(YamlContract.Request yamlContractRequest, Request dslContractRequest) {
 		Map<String, Object> yamlContractRequestHeaders = yamlContractRequest.headers;
 		if (MapUtils.isNotEmpty(yamlContractRequestHeaders)) {
-			dslContractRequest.headers((headers) -> yamlContractRequestHeaders.forEach((key, value) -> {
+			dslContractRequest.headers(headers -> yamlContractRequestHeaders.forEach((key, value) -> {
 				List<YamlContract.KeyValueMatcher> matchers = yamlContractRequest.matchers.headers.stream()
-						.filter((header) -> header.key.equals(key)).collect(Collectors.toList());
+						.filter(header -> header.key.equals(key)).collect(Collectors.toList());
 				matchers.forEach(matcher -> {
 					if (value instanceof List) {
 						((List<?>) value)
@@ -248,7 +248,7 @@ class YamlToContracts {
 	private void mapRequestCookies(YamlContract.Request yamlContractRequest, Request dslContractRequest) {
 		Map<String, Object> yamlContractRequestCookies = yamlContractRequest.cookies;
 		if (MapUtils.isNotEmpty(yamlContractRequestCookies)) {
-			dslContractRequest.cookies((cookies) -> yamlContractRequestCookies.forEach((key, value) -> {
+			dslContractRequest.cookies(cookies -> yamlContractRequestCookies.forEach((key, value) -> {
 				YamlContract.KeyValueMatcher matcher = yamlContractRequest.matchers.cookies.stream()
 						.filter(cookie -> cookie.key.equals(key)).findFirst().orElse(null);
 				cookies.cookie(key, clientValue(value, matcher, key));
@@ -273,7 +273,7 @@ class YamlToContracts {
 			Map<String, Object> multipartMap = new HashMap<>();
 			yamlContractRequest.multipart.params.forEach((paramKey, paramValue) -> {
 				YamlContract.KeyValueMatcher matcher = yamlContractRequest.matchers.multipart.params.stream()
-						.filter((param) -> param.key.equals(paramKey)).findFirst().orElse(null);
+						.filter(param -> param.key.equals(paramKey)).findFirst().orElse(null);
 				Object value = paramValue;
 				if (matcher != null) {
 					value = matcher.regex != null ? Pattern.compile(matcher.regex)
@@ -283,7 +283,7 @@ class YamlToContracts {
 			});
 			yamlContractRequest.multipart.named.forEach(namedParam -> {
 				YamlContract.MultipartNamedStubMatcher matcher = yamlContractRequest.matchers.multipart.named.stream()
-						.filter((stubMatcher) -> stubMatcher.paramName.equals(namedParam.paramName)).findFirst()
+						.filter(stubMatcher -> stubMatcher.paramName.equals(namedParam.paramName)).findFirst()
 						.orElse(null);
 				Object fileNameValue = namedParam.fileName;
 				Object fileContentValue = namedParam.fileContent;
@@ -323,7 +323,7 @@ class YamlToContracts {
 	}
 
 	private void mapRequestBodyMatchers(YamlContract.Request yamlContractRequest, Request dslContractRequest) {
-		dslContractRequest.bodyMatchers((bodyMatchers) -> Optional.ofNullable(yamlContractRequest.matchers)
+		dslContractRequest.bodyMatchers(bodyMatchers -> Optional.ofNullable(yamlContractRequest.matchers)
 				.map(stubMatchers -> stubMatchers.body).ifPresent(stubMatchers -> stubMatchers.forEach(stubMatcher -> {
 					ContentType contentType = evaluateClientSideContentType(
 							yamlHeadersToContractHeaders(
@@ -534,7 +534,7 @@ class YamlToContracts {
 	private void mapOutput(YamlContract yamlContract, Contract dslContract) {
 		YamlContract.OutputMessage yamlContractOutputMessage = yamlContract.outputMessage;
 		if (yamlContract.outputMessage != null) {
-			dslContract.outputMessage((dslContractOutputMessage) -> {
+			dslContract.outputMessage(dslContractOutputMessage -> {
 				mapOutputAssertThat(yamlContractOutputMessage, dslContractOutputMessage);
 				mapOutputSentTo(yamlContractOutputMessage, dslContractOutputMessage);
 				mapOutputMessageHeaders(yamlContractOutputMessage, dslContractOutputMessage);

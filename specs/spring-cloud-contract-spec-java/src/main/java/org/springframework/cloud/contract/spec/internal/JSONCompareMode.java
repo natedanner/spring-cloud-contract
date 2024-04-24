@@ -38,6 +38,6 @@ public enum JSONCompareMode {
 	/**
 	 * Strict order checking. Extensible, and strict array ordering.
 	 */
-	STRICT_ORDER;
+	STRICT_ORDER
 
 }

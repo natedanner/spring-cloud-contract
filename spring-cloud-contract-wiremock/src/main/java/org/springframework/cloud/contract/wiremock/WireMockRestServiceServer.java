@@ -83,13 +83,13 @@ public final class WireMockRestServiceServer {
 
 	private String baseUrl = "";
 
-	private boolean bufferContent = false;
+	private boolean bufferContent;
 
-	private MockRestServiceServerBuilder builder;
+	private final MockRestServiceServerBuilder builder;
 
-	private List<String> locations = new ArrayList<String>();
+	private final List<String> locations = new ArrayList<>();
 
-	private List<String> files = new ArrayList<String>();
+	private final List<String> files = new ArrayList<>();
 
 	private boolean ignoreExpectOrder = true;
 
@@ -281,7 +281,7 @@ public final class WireMockRestServiceServer {
 	}
 
 	private Matcher<String> requestMatcher(RequestPattern request) {
-		return new TypeSafeMatcher<String>() {
+		return new TypeSafeMatcher<>() {
 			@Override
 			protected boolean matchesSafely(String item) {
 				if (request.getUrlPathPattern() != null) {
@@ -447,8 +447,8 @@ public final class WireMockRestServiceServer {
 		}
 
 		private String request(RequestPattern request) {
-			return (request.getUrlPath() == null ? (request.getUrl() == null ? "/" : request.getUrl())
-					: request.getUrlPath());
+			return request.getUrlPath() == null ? (request.getUrl() == null ? "/" : request.getUrl())
+					: request.getUrlPath();
 		}
 
 	}

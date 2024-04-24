@@ -68,7 +68,7 @@ public class Body extends DslProperty {
 	}
 
 	private static Map<String, Object> extractValue(Map<String, DslProperty> body, final Function valueProvider) {
-		final Map<String, Object> map = new LinkedHashMap<String, Object>();
+		final Map<String, Object> map = new LinkedHashMap<>();
 		body.forEach((key, value) -> map.put(key, valueProvider.apply(value)));
 		return map;
 	}

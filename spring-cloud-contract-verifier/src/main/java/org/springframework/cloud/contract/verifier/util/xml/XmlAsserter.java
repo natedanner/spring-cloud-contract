@@ -34,7 +34,7 @@ class XmlAsserter implements XmlVerifiable {
 
 	private static final Log log = LogFactory.getLog(XmlAsserter.class);
 
-	private final static Pattern SPECIAL_REGEX_CHARS = Pattern.compile("[{}()\\[\\].+*?^$\\\\|]");
+	private static final Pattern SPECIAL_REGEX_CHARS = Pattern.compile("[{}()\\[\\].+*?^$\\\\|]");
 
 	final XmlCachedObjects cachedObjects;
 
@@ -71,7 +71,7 @@ class XmlAsserter implements XmlVerifiable {
 			return wrapValueWithSingleQuotes(string);
 		}
 		String[] split = string.split("'");
-		LinkedList<String> list = new LinkedList<String>();
+		LinkedList<String> list = new LinkedList<>();
 		list.add("concat(");
 		for (String splitString : split) {
 			list.add("'" + splitString + "'");
@@ -114,7 +114,7 @@ class XmlAsserter implements XmlVerifiable {
 	public FieldAssertion node(final String value) {
 		FieldAssertion asserter = new FieldAssertion(this.cachedObjects, this.xPathBuffer, this.specialCaseXPathBuffer,
 				value, this.xmlAsserterConfiguration);
-		asserter.xPathBuffer.offer(String.valueOf(value));
+		asserter.xPathBuffer.offer(value);
 		asserter.xPathBuffer.offer("/");
 		return asserter;
 	}
@@ -137,13 +137,13 @@ class XmlAsserter implements XmlVerifiable {
 	public XmlVerifiable withAttribute(String attribute, String attributeValue) {
 		FieldAssertion asserter = new FieldAssertion(this.cachedObjects, this.xPathBuffer, this.specialCaseXPathBuffer,
 				this.fieldName, this.xmlAsserterConfiguration);
-		if (asserter.xPathBuffer.peekLast().equals("/")) {
+		if ("/".equals(asserter.xPathBuffer.peekLast())) {
 			asserter.xPathBuffer.removeLast();
 		}
 		if (isReadyToCheck()) {
 			asserter.xPathBuffer.offer("/" + this.fieldName);
 		}
-		asserter.xPathBuffer.offer("[@" + String.valueOf(attribute) + "=" + escapeText(attributeValue) + "]");
+		asserter.xPathBuffer.offer("[@" + attribute + "=" + escapeText(attributeValue) + "]");
 		updateCurrentBuffer(asserter);
 		asserter.checkBufferedXPathString();
 		return asserter;
@@ -175,7 +175,7 @@ class XmlAsserter implements XmlVerifiable {
 	public XmlVerifiable index(int index) {
 		FieldAssertion asserter = new FieldAssertion(this.cachedObjects, this.xPathBuffer, this.specialCaseXPathBuffer,
 				this.fieldName, this.xmlAsserterConfiguration);
-		if (asserter.xPathBuffer.peekLast().equals("/")) {
+		if ("/".equals(asserter.xPathBuffer.peekLast())) {
 			asserter.xPathBuffer.removeLast();
 		}
 		asserter.xPathBuffer.offer("[" + index + "]");
@@ -196,7 +196,7 @@ class XmlAsserter implements XmlVerifiable {
 	public XmlArrayVerifiable array(final String value) {
 		ArrayValueAssertion asserter = new ArrayValueAssertion(this.cachedObjects, this.xPathBuffer,
 				this.specialCaseXPathBuffer, value, this.xmlAsserterConfiguration);
-		asserter.xPathBuffer.offer(String.valueOf(value));
+		asserter.xPathBuffer.offer(value);
 		asserter.xPathBuffer.offer("/");
 		return asserter;
 	}
@@ -349,11 +349,11 @@ class XmlAsserter implements XmlVerifiable {
 	}
 
 	String createXPathString(LinkedList<String> buffer) {
-		LinkedList<String> queue = new LinkedList<String>(buffer);
+		LinkedList<String> queue = new LinkedList<>(buffer);
 		StringBuilder stringBuffer = new StringBuilder();
 		while (!queue.isEmpty()) {
 			String value = queue.remove();
-			if (!(queue.isEmpty() && value.equals("/"))) {
+			if (!(queue.isEmpty() && "/".equals(value))) {
 				stringBuffer.append(value);
 			}
 		}

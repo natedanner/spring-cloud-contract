@@ -30,42 +30,37 @@ class contract_rest_with_tags implements Supplier<Collection<Contract>> {
 
 	static Object description = Collections.singletonList(
 			// tag::description[]
-			Contract.make(c -> {
-				c.description("Some description");
-			}));
+			Contract.make(c ->
+				c.description("Some description")));
 
 	// end::description[]
 
 	static Object name = Collections.singletonList(
 			// tag::name[]
-			Contract.make(c -> {
-				c.name("some name");
-			}));
+			Contract.make(c ->
+				c.name("some name")));
 
 	// end::name[]
 
 	static Object ignored = Collections.singletonList(
 			// tag::ignored[]
-			Contract.make(c -> {
-				c.ignored();
-			}));
+			Contract.make(c ->
+				c.ignored()));
 
 	// end::ignored[]
 
 	static Object in_progress = Collections.singletonList(
 			// tag::in_progress[]
-			Contract.make(c -> {
-				c.inProgress();
-			}));
+			Contract.make(c ->
+				c.inProgress()));
 
 	// end::in_progress[]
 
 	static Object metadata = Collections.singletonList(
 			// tag::metadata[]
-			Contract.make(c -> {
+			Contract.make(c ->
 				c.metadata(MetadataUtil.map().entry("wiremock", ContractVerifierUtil.map().entry("stubMapping",
-						"{ \"response\" : { \"fixedDelayMilliseconds\" : 2000 } }")));
-			}));
+						"{ \"response\" : { \"fixedDelayMilliseconds\" : 2000 } }")))));
 
 	// end::metadata[]
 
@@ -78,21 +73,19 @@ class contract_rest_with_tags implements Supplier<Collection<Contract>> {
 			c.ignored();
 			c.inProgress();
 			c.request(r -> {
-				r.url("/foo", u -> {
+				r.url("/foo", u ->
 					u.queryParameters(q -> {
 						q.parameter("a", "b");
 						q.parameter("b", "c");
-					});
-				});
+					}));
 				r.method(r.PUT());
 				r.headers(h -> {
 					h.header("foo", r.value(r.client(r.regex("bar")), r.server("bar")));
 					h.header("fooReq", "baz");
 				});
 				r.body(ContractVerifierUtil.map().entry("foo", "bar"));
-				r.bodyMatchers(m -> {
-					m.jsonPath("$.foo", m.byRegex("bar"));
-				});
+				r.bodyMatchers(m ->
+					m.jsonPath("$.foo", m.byRegex("bar")));
 			});
 			c.response(r -> {
 				r.fixedDelayMilliseconds(1000);

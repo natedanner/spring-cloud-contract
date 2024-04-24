@@ -151,8 +151,8 @@ public class StubConfiguration {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((this.artifactId == null) ? 0 : this.artifactId.hashCode());
-		result = prime * result + ((this.groupId == null) ? 0 : this.groupId.hashCode());
+		result = prime * result + (this.artifactId == null ? 0 : this.artifactId.hashCode());
+		result = prime * result + (this.groupId == null ? 0 : this.groupId.hashCode());
 		return result;
 	}
 
@@ -198,10 +198,7 @@ public class StubConfiguration {
 		if (strings.length >= 3 && !(this.version.equals(strings[2]) || DEFAULT_VERSION.equals(strings[2]))) {
 			return false;
 		}
-		if (strings.length == 4 && !(this.classifier.equals(strings[3]) || DEFAULT_CLASSIFIER.equals(strings[3]))) {
-			return false;
-		}
-		return true;
+		return !(strings.length == 4 && !(this.classifier.equals(strings[3]) || DEFAULT_CLASSIFIER.equals(strings[3])));
 	}
 
 	private String[] ivyNotationFrom(String ivyNotation) {

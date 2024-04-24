@@ -97,31 +97,31 @@ public class StubRunnerOptions {
 	/**
 	 * Should only stubs applicable for the given consumer get registered.
 	 */
-	private boolean stubsPerConsumer = false;
+	private final boolean stubsPerConsumer;
 
 	/**
 	 * Name of the consumer. If not set should default to {@code spring.application.name}.
 	 */
-	private String consumerName;
+	private final String consumerName;
 
 	/**
 	 * For debugging purposes you can output the registered mappings to a given folder.
 	 * Each HTTP server stub will have its own subfolder where all the mappings will get
 	 * stored.
 	 */
-	private String mappingsOutputFolder;
+	private final String mappingsOutputFolder;
 
 	/**
 	 * If set to {@code false} will NOT delete stubs from a temporary folder after running
 	 * tests.
 	 */
-	private boolean deleteStubsAfterTest;
+	private final boolean deleteStubsAfterTest;
 
 	/**
 	 * When enabled, this flag will tell stub runner to not load the generated stubs, but
 	 * convert the found contracts at runtime to a stub format and run those stubs.
 	 */
-	private boolean generateStubs;
+	private final boolean generateStubs;
 
 	/**
 	 * When enabled, this flag will tell stub runner to throw an exception when no stubs /
@@ -133,7 +133,7 @@ public class StubRunnerOptions {
 	 * Map of properties that can be passed to custom
 	 * {@link org.springframework.cloud.contract.stubrunner.StubDownloaderBuilder}.
 	 */
-	private Map<String, String> properties;
+	private final Map<String, String> properties;
 
 	/**
 	 *

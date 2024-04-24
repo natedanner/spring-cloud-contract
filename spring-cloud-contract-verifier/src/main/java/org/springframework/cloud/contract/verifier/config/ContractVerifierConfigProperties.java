@@ -72,12 +72,12 @@ public class ContractVerifierConfigProperties {
 	/**
 	 * Patterns that should be taken into account for processing.
 	 */
-	private List<String> includedFiles = new ArrayList<String>();
+	private List<String> includedFiles = new ArrayList<>();
 
 	/**
 	 * Patterns for which generated tests should be @Ignored.
 	 */
-	private List<String> ignoredFiles = new ArrayList<String>();
+	private List<String> ignoredFiles = new ArrayList<>();
 
 	/**
 	 * Imports that should be added to generated tests.

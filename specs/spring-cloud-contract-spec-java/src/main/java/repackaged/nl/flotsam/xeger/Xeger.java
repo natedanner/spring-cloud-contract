@@ -112,7 +112,7 @@ public class Xeger {
 			return;
 		}
 		List<Transition> transitions = state.getSortedTransitions(false);
-		if (transitions.size() == 0) {
+		if (transitions.isEmpty()) {
 			assert state.isAccept();
 			return;
 		}

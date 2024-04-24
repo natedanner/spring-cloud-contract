@@ -124,7 +124,7 @@ public class ContractFileScanner {
 				boolean contractFile = isContractFile(file);
 				boolean included = !StringUtils.hasText(includeMatcher)
 						|| file.getAbsolutePath().matches(includeMatcher);
-				included = !CollectionUtils.isEmpty(includeMatchers) ? matchesPattern(file, includeMatchers) : included;
+				included = CollectionUtils.isEmpty(includeMatchers) ? included : matchesPattern(file, includeMatchers);
 				if (contractFile && included) {
 					addContractToTestGeneration(result, files, file, i,
 							ContractVerifierDslConverter.convertAsCollection(baseDir, file));

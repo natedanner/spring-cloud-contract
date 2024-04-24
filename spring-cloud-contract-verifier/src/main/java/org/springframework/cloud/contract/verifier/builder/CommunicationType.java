@@ -24,6 +24,6 @@ package org.springframework.cloud.contract.verifier.builder;
  */
 public enum CommunicationType {
 
-	REQUEST, RESPONSE, INPUT, OUTPUT;
+	REQUEST, RESPONSE, INPUT, OUTPUT
 
 }

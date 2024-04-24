@@ -133,27 +133,27 @@ abstract class PatternValueDslProperty<T extends DslProperty> implements RegexCr
 	public T anyDate() {
 		int d = this.random.nextInt(8) + 1;
 		return createAndValidateProperty(RegexPatterns.ANY_DATE,
-				"201" + String.valueOf(d) + "-0" + String.valueOf(d) + "-1" + String.valueOf(d));
+				"201" + d + "-0" + d + "-1" + d);
 	}
 
 	@Override
 	public T anyDateTime() {
 		final int d = this.random.nextInt(8) + 1;
 		return createAndValidateProperty(RegexPatterns.ANY_DATE_TIME,
-				"201" + String.valueOf(d) + "-0" + String.valueOf(d) + "-1" + String.valueOf(d) + "T12:23:34");
+				"201" + d + "-0" + d + "-1" + d + "T12:23:34");
 	}
 
 	@Override
 	public T anyTime() {
 		int d = this.random.nextInt(9);
-		return createAndValidateProperty(RegexPatterns.ANY_TIME, "12:2" + String.valueOf(d) + ":3" + String.valueOf(d));
+		return createAndValidateProperty(RegexPatterns.ANY_TIME, "12:2" + d + ":3" + d);
 	}
 
 	@Override
 	public T anyIso8601WithOffset() {
 		final int d = this.random.nextInt(8) + 1;
 		return createAndValidateProperty(RegexPatterns.ISO8601_WITH_OFFSET,
-				"201" + String.valueOf(d) + "-0" + String.valueOf(d) + "-1" + String.valueOf(d) + "T12:23:34.123Z");
+				"201" + d + "-0" + d + "-1" + d + "T12:23:34.123Z");
 	}
 
 	@Override

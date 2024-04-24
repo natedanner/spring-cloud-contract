@@ -96,7 +96,7 @@ public class Cookies {
 	 * @return converted map
 	 */
 	public Map<String, Object> asTestSideMap() {
-		final Map<String, Object> map = new HashMap<String, Object>();
+		final Map<String, Object> map = new HashMap<>();
 		entries.forEach(cookie -> map.put(cookie.getKey(), ContractUtils.convertTestSideRecursively(cookie)));
 		return map;
 	}

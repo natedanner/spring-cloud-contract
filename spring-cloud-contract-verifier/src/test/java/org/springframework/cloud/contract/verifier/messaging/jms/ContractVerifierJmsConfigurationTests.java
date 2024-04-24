@@ -28,12 +28,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class ContractVerifierJmsConfigurationTests {
 
-	private ApplicationContextRunner contextRunner = new ApplicationContextRunner()
+	private final ApplicationContextRunner contextRunner = new ApplicationContextRunner()
 			.withConfiguration(AutoConfigurations.of(ContractVerifierJmsConfiguration.class));
 
 	@Test
 	public void shouldCreateBeansByDefault() {
-		this.contextRunner.run((context) -> {
+		this.contextRunner.run(context -> {
 			assertThat(context.getBeansOfType(JmsStubMessages.class)).hasSize(1);
 			assertThat(context.getBeansOfType(ContractVerifierJmsHelper.class)).hasSize(1);
 		});
@@ -41,7 +41,7 @@ public class ContractVerifierJmsConfigurationTests {
 
 	@Test
 	public void shouldNotCreateBeansWhenDisabled() {
-		this.contextRunner.withPropertyValues("stubrunner.jms.enabled=false").run((context) -> {
+		this.contextRunner.withPropertyValues("stubrunner.jms.enabled=false").run(context -> {
 			assertThat(context.getBeansOfType(JmsStubMessages.class)).hasSize(0);
 			assertThat(context.getBeansOfType(ContractVerifierJmsHelper.class)).hasSize(0);
 		});
@@ -49,7 +49,7 @@ public class ContractVerifierJmsConfigurationTests {
 
 	@Test
 	public void shouldCreateBeansWhenExplicitlyEnabled() {
-		this.contextRunner.withPropertyValues("stubrunner.jms.enabled=true").run((context) -> {
+		this.contextRunner.withPropertyValues("stubrunner.jms.enabled=true").run(context -> {
 			assertThat(context.getBeansOfType(JmsStubMessages.class)).hasSize(1);
 			assertThat(context.getBeansOfType(ContractVerifierJmsHelper.class)).hasSize(1);
 		});

@@ -81,7 +81,7 @@ class RunningStubsSpec extends Specification {
 
 	def "should return false if no stub has been found"() {
 		expect:
-			runningStubs.isPresent('missing artifact id') == false
+			!runningStubs.isPresent('missing artifact id')
 	}
 
 }

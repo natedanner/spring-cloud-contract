@@ -44,7 +44,7 @@ public final class NamesUtil {
 	 * @return empty string if separator is not found.
 	 */
 	public static String beforeLast(String string, String separator) {
-		if (string != null && string.indexOf(separator) > -1) {
+		if (string != null && string.contains(separator)) {
 			return string.substring(0, string.lastIndexOf(separator));
 		}
 		return "";
@@ -65,7 +65,7 @@ public final class NamesUtil {
 	 * Returns {@code true} if has a separatot in the string.
 	 */
 	public static boolean hasSeparator(String string, String separator) {
-		return string.indexOf(separator) > -1;
+		return string.contains(separator);
 	}
 
 	/**
@@ -128,7 +128,7 @@ public final class NamesUtil {
 	 * @return input string if there is no dot
 	 */
 	public static String toLastDot(String string) {
-		if (string.indexOf(".") > -1) {
+		if (string.contains(".")) {
 			return string.substring(0, string.lastIndexOf("."));
 		}
 		return string;
@@ -185,7 +185,7 @@ public final class NamesUtil {
 
 	private static class InvalidFolderRenamer extends SimpleFileVisitor<Path> {
 
-		private final Deque<FileAndNewName> filesToRename = new ArrayDeque<FileAndNewName>();
+		private final Deque<FileAndNewName> filesToRename = new ArrayDeque<>();
 
 		@Override
 		public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
@@ -199,9 +199,8 @@ public final class NamesUtil {
 		}
 
 		public void rename() {
-			this.filesToRename.forEach(fileAndNewName -> {
-				fileAndNewName.file.renameTo(new File(fileAndNewName.file.getParentFile(), fileAndNewName.newName));
-			});
+			this.filesToRename.forEach(fileAndNewName ->
+				fileAndNewName.file.renameTo(new File(fileAndNewName.file.getParentFile(), fileAndNewName.newName)));
 		}
 
 	}

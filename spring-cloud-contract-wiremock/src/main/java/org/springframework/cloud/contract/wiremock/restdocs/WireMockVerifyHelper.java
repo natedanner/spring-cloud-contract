@@ -38,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public abstract class WireMockVerifyHelper<T, S extends WireMockVerifyHelper<T, S>> {
 
-	private Map<String, JsonPath> jsonPaths = new LinkedHashMap<>();
+	private final Map<String, JsonPath> jsonPaths = new LinkedHashMap<>();
 
 	private MediaType contentType;
 

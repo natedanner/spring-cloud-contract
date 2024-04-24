@@ -51,7 +51,7 @@ public class AutoConfigureWireMockConfigurationCustomizerTests {
 	@Configuration
 	protected static class Config {
 
-		boolean executed = false;
+		boolean executed;
 
 		// tag::customizer_1[]
 		@Bean

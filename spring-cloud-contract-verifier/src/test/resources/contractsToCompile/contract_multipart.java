@@ -45,9 +45,8 @@ class contract_multipart implements Supplier<Collection<Contract>> {
 			c.request(r -> {
 				r.method("PUT");
 				r.url("/multipart");
-				r.headers(h -> {
-					h.contentType("multipart/form-data;boundary=AaB03x");
-				});
+				r.headers(h ->
+					h.contentType("multipart/form-data;boundary=AaB03x"));
 				r.multipart(ContractVerifierUtil.map()
 						// key (parameter name), value (parameter value) pair
 						.entry("formParameter", r.$(r.c(r.regex("\".+\"")), r.p("\"formParameterValue\"")))
@@ -58,9 +57,8 @@ class contract_multipart implements Supplier<Collection<Contract>> {
 						// "fileContent")`
 						.entry("file", r.named(namedProps(r))));
 			});
-			c.response(r -> {
-				r.status(r.OK());
-			});
+			c.response(r ->
+				r.status(r.OK()));
 		}));
 	}
 

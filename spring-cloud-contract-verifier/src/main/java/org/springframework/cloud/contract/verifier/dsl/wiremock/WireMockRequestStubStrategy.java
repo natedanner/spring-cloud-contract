@@ -147,7 +147,7 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 			return null;
 		}
 		RequestMethod requestMethod = RequestMethod.fromString(
-				Optional.ofNullable(request.getMethod().getClientValue()).map(c -> c.toString()).orElse(null));
+				Optional.ofNullable(request.getMethod().getClientValue()).map(Object::toString).orElse(null));
 		UrlPattern urlPattern = urlPattern();
 		return RequestPatternBuilder.newRequestPattern(requestMethod, urlPattern);
 	}
@@ -252,7 +252,7 @@ class WireMockRequestStubStrategy extends BaseWireMockStubStrategy {
 		PathBodyMatcher pathMatcher = (PathBodyMatcher) matcher;
 		requestPattern.withRequestBody(
 				WireMock.matchingXPath(pathMatcher.path(), XPathBodyMatcherToWireMockValuePatternConverter
-						.mapToPattern(pathMatcher.matchingType(), String.valueOf(retrievedValue))));
+						.mapToPattern(pathMatcher.matchingType(), retrievedValue)));
 	}
 
 	private boolean onlySizeAssertionsArePresent(JsonPaths values) {

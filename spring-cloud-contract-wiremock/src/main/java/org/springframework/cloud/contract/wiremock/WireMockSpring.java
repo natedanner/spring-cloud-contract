@@ -43,7 +43,7 @@ import org.springframework.util.ClassUtils;
  */
 public abstract class WireMockSpring {
 
-	private static boolean initialized = false;
+	private static boolean initialized;
 
 	public static WireMockConfiguration options() {
 		if (!initialized) {

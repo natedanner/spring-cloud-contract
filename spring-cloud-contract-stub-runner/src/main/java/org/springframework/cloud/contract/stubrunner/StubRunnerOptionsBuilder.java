@@ -60,7 +60,7 @@ public class StubRunnerOptionsBuilder {
 
 	private StubRunnerOptions.StubRunnerProxyOptions stubRunnerProxyOptions;
 
-	private boolean stubsPerConsumer = false;
+	private boolean stubsPerConsumer;
 
 	private String consumerName;
 

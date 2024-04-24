@@ -89,8 +89,7 @@ public class WireMockApplicationListener implements ApplicationListener<Applicat
 	private Map<String, Object> getWireMockSource(ConfigurableEnvironment environment) {
 		MutablePropertySources propertySources = environment.getPropertySources();
 		addPropertySource(propertySources);
-		Map<String, Object> source = ((MapPropertySource) propertySources.get("wiremock")).getSource();
-		return source;
+		return ((MapPropertySource) propertySources.get("wiremock")).getSource();
 	}
 
 	private boolean isHttpsDynamic(int httpsPortProperty) {

@@ -25,7 +25,7 @@ import static org.springframework.cloud.contract.verifier.config.TestFramework.S
 
 class GeneratorScannerSpec extends Specification {
 
-	private SingleTestGenerator classGenerator = Mock(SingleTestGenerator)
+    private final SingleTestGenerator classGenerator = Mock(SingleTestGenerator)
 
 	def "should find all json files and generate 6 classes for them"() {
 		given:

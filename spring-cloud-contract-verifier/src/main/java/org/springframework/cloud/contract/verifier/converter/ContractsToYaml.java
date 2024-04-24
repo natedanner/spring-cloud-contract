@@ -226,12 +226,12 @@ class ContractsToYaml {
 					named.paramName = key;
 					named.fileName = fileName instanceof String ? Optional.ofNullable(((NamedProperty) value).getName())
 							.map(DslProperty::getServerValue).map(Object::toString).orElse(null) : null;
-					named.fileContent = (String) Optional.ofNullable(fileContent).filter(f -> f instanceof String)
+					named.fileContent = (String) Optional.ofNullable(fileContent).filter(String.class::isInstance)
 							.orElse(null);
 					named.fileContentAsBytes = fileContent instanceof FromFileProperty
 							? new String(((FromFileProperty) fileContent).asBytes()) : null;
 					named.fileContentFromFileAsBytes = resolveFileNameAsBytes(fileContent);
-					named.contentType = (String) Optional.ofNullable(contentType).filter(f -> f instanceof String)
+					named.contentType = (String) Optional.ofNullable(contentType).filter(String.class::isInstance)
 							.orElse(null);
 					named.fileNameCommand = fileName instanceof ExecutionProperty ? fileName.toString() : null;
 					named.fileContentCommand = fileContent instanceof ExecutionProperty ? fileContent.toString() : null;
@@ -380,8 +380,8 @@ class ContractsToYaml {
 	}
 
 	protected YamlContract.ValueMatcher valueMatcher(Object o) {
-		return Optional.ofNullable(o).filter(object -> object instanceof RegexProperty)
-				.map(object -> (RegexProperty) object).map(regexProperty -> {
+		return Optional.ofNullable(o).filter(RegexProperty.class::isInstance)
+				.map(RegexProperty.class::cast).map(regexProperty -> {
 					YamlContract.ValueMatcher valueMatcher = new YamlContract.ValueMatcher();
 					valueMatcher.regex = regexProperty.pattern();
 					return valueMatcher;
@@ -391,7 +391,7 @@ class ContractsToYaml {
 	protected void setInputBodyMatchers(DslProperty<?> body, List<YamlContract.BodyStubMatcher> bodyMatchers) {
 		Object testSideValues = MapConverter.getTestSideValues(body);
 		JsonPaths paths = new JsonToJsonPathsConverter().transformToJsonPathWithStubsSideValues(body);
-		paths.stream().filter((path) -> path.valueBeforeChecking() instanceof Pattern).forEach((path) -> {
+		paths.stream().filter(path -> path.valueBeforeChecking() instanceof Pattern).forEach(path -> {
 			Object element = JsonToJsonPathsConverter.readElement(testSideValues, path.keyBeforeChecking());
 			YamlContract.BodyStubMatcher bodyStubMatcher = new YamlContract.BodyStubMatcher();
 			bodyStubMatcher.path = path.keyBeforeChecking();
@@ -433,7 +433,7 @@ class ContractsToYaml {
 
 	private void mapResponseBodyMatchers(Response contractResponse, YamlContract.Response response) {
 		Optional.ofNullable(contractResponse.getBodyMatchers()).map(BodyMatchers::matchers)
-				.ifPresent(bodyMatchers -> bodyMatchers.forEach((bodyMatcher) -> {
+				.ifPresent(bodyMatchers -> bodyMatchers.forEach(bodyMatcher -> {
 					YamlContract.BodyTestMatcher bodyTestMatcher = new YamlContract.BodyTestMatcher();
 					bodyTestMatcher.path = bodyMatcher.path();
 					bodyTestMatcher.type = testMatcherType(bodyMatcher.matchingType());
@@ -471,7 +471,7 @@ class ContractsToYaml {
 
 	private void mapResponseStatus(Response contractResponse, YamlContract.Response response) {
 		response.status = Optional.ofNullable(contractResponse.getStatus()).map(DslProperty::getClientValue)
-				.map(clientValue -> (Integer) clientValue).orElse(null);
+				.map(Integer.class::cast).orElse(null);
 	}
 
 	private void mapResponseFixedDelayMilliseconds(Response contractResponse, YamlContract.Response response) {
@@ -486,7 +486,7 @@ class ContractsToYaml {
 	protected void setOutputBodyMatchers(DslProperty<?> body, List<YamlContract.BodyTestMatcher> bodyMatchers) {
 		Object testSideValues = MapConverter.getTestSideValues(body);
 		JsonPaths paths = new JsonToJsonPathsConverter().transformToJsonPathWithTestsSideValues(body);
-		paths.stream().filter(m -> m.valueBeforeChecking() instanceof Pattern).forEach((m) -> {
+		paths.stream().filter(m -> m.valueBeforeChecking() instanceof Pattern).forEach(m -> {
 			Object element = JsonToJsonPathsConverter.readElement(testSideValues, m.keyBeforeChecking());
 			YamlContract.BodyTestMatcher bodyTestMatcher = new YamlContract.BodyTestMatcher();
 			bodyTestMatcher.path = m.keyBeforeChecking();
@@ -495,7 +495,7 @@ class ContractsToYaml {
 			bodyTestMatcher.regexType = regexType(element);
 			bodyMatchers.add(bodyTestMatcher);
 		});
-		Optional.ofNullable(body).filter(b -> b.getServerValue() instanceof Pattern).ifPresent((b) -> {
+		Optional.ofNullable(body).filter(b -> b.getServerValue() instanceof Pattern).ifPresent(b -> {
 			YamlContract.BodyTestMatcher bodyTestMatcher = new YamlContract.BodyTestMatcher();
 			bodyTestMatcher.type = YamlContract.TestMatcherType.by_regex;
 			bodyTestMatcher.value = ((Pattern) b.getServerValue()).pattern();

@@ -34,7 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class AutoConfigureMessageVerifierTests {
 
-	private ApplicationContextRunner contextRunner = new ApplicationContextRunner()
+	private final ApplicationContextRunner contextRunner = new ApplicationContextRunner()
 			.withUserConfiguration(Configuration.class);
 
 	@Test
@@ -42,7 +42,7 @@ public class AutoConfigureMessageVerifierTests {
 		this.contextRunner.withClassLoader(
 				new FilteredClassLoader(org.apache.camel.Message.class, org.springframework.messaging.Message.class,
 						JmsTemplate.class, KafkaTemplate.class, RabbitTemplate.class, Binder.class))
-				.run((context) -> {
+				.run(context -> {
 					assertThat(context.getBeansOfType(MessageVerifierSender.class)).hasSize(1);
 					assertThat(context.getBeansOfType(NoOpStubMessages.class)).hasSize(1);
 				});

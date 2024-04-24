@@ -133,7 +133,7 @@ class JsonBodyVerificationBuilder implements BodyMethodGeneration, ClassVerifier
 		}
 		origSize = originalBody instanceof List ? ((List) originalBody).size() : -1;
 		convertedSize = convertedBody instanceof List ? ((List) convertedBody).size() : -1;
-		return (origSize > 0 && convertedSize == 0);
+		return origSize > 0 && convertedSize == 0;
 	}
 
 	private boolean hasRequestBody() {

@@ -24,6 +24,6 @@ package org.springframework.cloud.contract.verifier.util.xml;
  */
 class XmlAsserterConfiguration {
 
-	boolean ignoreXPathException = false;
+	boolean ignoreXPathException;
 
 }

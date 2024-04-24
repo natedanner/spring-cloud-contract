@@ -48,7 +48,7 @@ import org.springframework.cloud.contract.verifier.util.MapConverter;
  * @author Marcin Grzejszczak
  * @since 1.1.0
  */
-public class TestSideRequestTemplateModel {
+public final class TestSideRequestTemplateModel {
 
 	/**
 	 * Request URL

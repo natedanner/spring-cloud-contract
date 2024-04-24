@@ -41,10 +41,8 @@ class contract_docs_examples implements Supplier<Collection<Contract>> {
 				// (a service implementing this contract should respond
 				// with following response after receiving request
 				// specified in "request" part above).
-				c.response(r -> {
-					r.status(200);
-					// ...
-				});
+				c.response(r ->
+					r.status(200));
 
 				// Contract priority, which can be used for overriding
 				// contracts (1 is highest). Priority is optional.
@@ -62,9 +60,8 @@ class contract_docs_examples implements Supplier<Collection<Contract>> {
 					r.url("/foo");
 				});
 
-				c.response(r -> {
-					r.status(200);
-				});
+				c.response(r ->
+					r.status(200));
 
 				c.priority(1);
 			});
@@ -80,10 +77,9 @@ class contract_docs_examples implements Supplier<Collection<Contract>> {
 					r.urlPath("/users");
 				});
 
-				c.response(r -> {
+				c.response(r ->
 					// ...
-					r.status(200);
-				});
+					r.status(200));
 			});
 
 	// end::request[]
@@ -98,10 +94,9 @@ class contract_docs_examples implements Supplier<Collection<Contract>> {
 					r.url("http://localhost:8888/users");
 				});
 
-				c.response(r -> {
+				c.response(r ->
 					// ...
-					r.status(200);
-				});
+					r.status(200));
 			});
 
 	// end::url[]
@@ -113,7 +108,7 @@ class contract_docs_examples implements Supplier<Collection<Contract>> {
 					// ...
 					r.method(r.GET());
 
-					r.urlPath("/users", u -> {
+					r.urlPath("/users", u ->
 
 						// Each parameter is specified in form
 						// `'paramName' : paramValue` where parameter value
@@ -140,16 +135,14 @@ class contract_docs_examples implements Supplier<Collection<Contract>> {
 							// `notMatching` functions tests if parameter
 							// does not match passed regular expression.
 							q.parameter("loginStartsWith", r.value(r.consumer(r.notMatching(".{0,2}")), r.producer(3)));
-						});
-					});
+						}));
 
 					// ...
 				});
 
-				c.response(r -> {
+				c.response(r ->
 					// ...
-					r.status(200);
-				});
+					r.status(200));
 			});
 
 	// end::urlpath[]
@@ -172,10 +165,9 @@ class contract_docs_examples implements Supplier<Collection<Contract>> {
 					// ...
 				});
 
-				c.response(r -> {
+				c.response(r ->
 					// ...
-					r.status(200);
-				});
+					r.status(200));
 			});
 
 	// end::headers[]
@@ -198,10 +190,9 @@ class contract_docs_examples implements Supplier<Collection<Contract>> {
 					// ...
 				});
 
-				c.response(r -> {
+				c.response(r ->
 					// ...
-					r.status(200);
-				});
+					r.status(200));
 			});
 
 	// end::cookies[]
@@ -219,10 +210,9 @@ class contract_docs_examples implements Supplier<Collection<Contract>> {
 					r.body("{ \"login\" : \"john\", \"name\": \"John The Contract\" }");
 				});
 
-				c.response(r -> {
+				c.response(r ->
 					// ...
-					r.status(200);
-				});
+					r.status(200));
 			});
 
 	// end::body[]
@@ -239,10 +229,9 @@ class contract_docs_examples implements Supplier<Collection<Contract>> {
 					r.body(r.equalToXml("<user><login>john</login><name>John The Contract</name></user>"));
 				});
 
-				c.response(r -> {
+				c.response(r ->
 					// ...
-					r.status(200);
-				});
+					r.status(200));
 			});
 
 	// end::bodyAsXml[]
@@ -255,11 +244,10 @@ class contract_docs_examples implements Supplier<Collection<Contract>> {
 					r.method(r.GET());
 					r.url("/foo");
 				});
-				c.response(r -> {
+				c.response(r ->
 					// Status code sent by the server
 					// in response to request specified above.
-					r.status(r.OK());
-				});
+					r.status(r.OK()));
 			});
 
 	// end::response[]
@@ -275,9 +263,8 @@ class contract_docs_examples implements Supplier<Collection<Contract>> {
 					r.status(r.OK());
 					r.body(ContractVerifierUtil.map().entry("id", r.$(r.anyNumber())).entry("surname",
 							r.$(r.consumer("Kowalsky"), r.producer(r.regex("[a-zA-Z]+")))));
-					r.headers(h -> {
-						h.header("Content-Type", "text/plain");
-					});
+					r.headers(h ->
+						h.header("Content-Type", "text/plain"));
 				});
 			});
 
@@ -291,9 +278,8 @@ class contract_docs_examples implements Supplier<Collection<Contract>> {
 				c.request(r -> {
 					r.method("POST");
 					r.url("/users/password");
-					r.headers(h -> {
-						h.contentType(h.applicationJson());
-					});
+					r.headers(h ->
+						h.contentType(h.applicationJson()));
 					r.body(ContractVerifierUtil.map()
 							.entry("email", r.$(r.consumer(r.optional(r.regex(r.email()))), r.producer("abc@abc.com")))
 							.entry("callback_url",
@@ -301,9 +287,8 @@ class contract_docs_examples implements Supplier<Collection<Contract>> {
 				});
 				c.response(r -> {
 					r.status(404);
-					r.headers(h -> {
-						h.header("Content-Type", "application/json");
-					});
+					r.headers(h ->
+						h.header("Content-Type", "application/json"));
 					r.body(ContractVerifierUtil.map().entry("code",
 							r.value(r.consumer("123123"), r.producer(r.optional("123123")))));
 				});
@@ -317,9 +302,8 @@ class contract_docs_examples implements Supplier<Collection<Contract>> {
 				c.request(r -> {
 					r.method("PUT");
 					r.url(r.$(r.consumer(r.regex("^/api/[0-9]{2}$")), r.producer("/api/12")));
-					r.headers(h -> {
-						h.header("Content-Type", "application/json");
-					});
+					r.headers(h ->
+						h.header("Content-Type", "application/json"));
 					r.body("[{\"text\": \"Gonna see you at Warsaw\" }]");
 				});
 				c.response(r -> {

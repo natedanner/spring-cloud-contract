@@ -72,7 +72,7 @@ public class HandlebarsJsonPathHelper implements Helper<Object> {
 		}
 
 		Map map = (Map) model;
-		return map.values().stream().anyMatch(o -> o instanceof TestSideRequestTemplateModel);
+		return map.values().stream().anyMatch(TestSideRequestTemplateModel.class::isInstance);
 	}
 
 	private Object returnObjectForStub(Object model, String jsonPath) {

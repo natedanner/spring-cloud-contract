@@ -44,10 +44,9 @@ class MessagingHeadersThen implements Then, BodyMethodVisitor {
 		endBodyBlock(this.blockBuilder);
 		startBodyBlock(this.blockBuilder, "and:");
 		OutputMessage outputMessage = singleContractMetadata.getContract().getOutputMessage();
-		outputMessage.getHeaders().executeForEachHeader(header -> {
+		outputMessage.getHeaders().executeForEachHeader(header ->
 			processHeaderElement(header.getName(), header.getServerValue() instanceof NotToEscapePattern
-					? header.getServerValue() : MapConverter.getTestSideValues(header.getServerValue()));
-		});
+					? header.getServerValue() : MapConverter.getTestSideValues(header.getServerValue())));
 		return this;
 	}
 

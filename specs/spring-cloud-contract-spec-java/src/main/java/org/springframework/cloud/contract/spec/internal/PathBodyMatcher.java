@@ -23,9 +23,9 @@ import java.util.Objects;
  */
 public class PathBodyMatcher implements BodyMatcher {
 
-	private String path;
+	private final String path;
 
-	private MatchingTypeValue matchingTypeValue;
+	private final MatchingTypeValue matchingTypeValue;
 
 	PathBodyMatcher(String path, MatchingTypeValue matchingTypeValue) {
 		this.path = path;

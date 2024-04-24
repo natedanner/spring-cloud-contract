@@ -88,11 +88,11 @@ public class YamlContract {
 
 		public String urlPath;
 
-		public Map<String, Object> queryParameters = new LinkedHashMap<String, Object>();
+		public Map<String, Object> queryParameters = new LinkedHashMap<>();
 
-		public Map<String, Object> headers = new LinkedHashMap<String, Object>();
+		public Map<String, Object> headers = new LinkedHashMap<>();
 
-		public Map<String, Object> cookies = new LinkedHashMap<String, Object>();
+		public Map<String, Object> cookies = new LinkedHashMap<>();
 
 		public Object body;
 
@@ -140,9 +140,9 @@ public class YamlContract {
 
 	public static class Multipart {
 
-		public Map<String, String> params = new LinkedHashMap<String, String>();
+		public Map<String, String> params = new LinkedHashMap<>();
 
-		public List<Named> named = new ArrayList<Named>();
+		public List<Named> named = new ArrayList<>();
 
 		@Override
 		public boolean equals(Object o) {
@@ -228,13 +228,13 @@ public class YamlContract {
 
 		public KeyValueMatcher url;
 
-		public List<BodyStubMatcher> body = new ArrayList<BodyStubMatcher>();
+		public List<BodyStubMatcher> body = new ArrayList<>();
 
-		public List<KeyValueMatcher> headers = new ArrayList<KeyValueMatcher>();
+		public List<KeyValueMatcher> headers = new ArrayList<>();
 
-		public List<QueryParameterMatcher> queryParameters = new ArrayList<QueryParameterMatcher>();
+		public List<QueryParameterMatcher> queryParameters = new ArrayList<>();
 
-		public List<KeyValueMatcher> cookies = new ArrayList<KeyValueMatcher>();
+		public List<KeyValueMatcher> cookies = new ArrayList<>();
 
 		public MultipartStubMatcher multipart;
 
@@ -322,15 +322,15 @@ public class YamlContract {
 
 	public enum RegexType {
 
-		as_integer, as_double, as_float, as_long, as_short, as_boolean, as_string;
+		as_integer, as_double, as_float, as_long, as_short, as_boolean, as_string
 
 	}
 
 	public static class MultipartStubMatcher {
 
-		public List<KeyValueMatcher> params = new ArrayList<KeyValueMatcher>();
+		public List<KeyValueMatcher> params = new ArrayList<>();
 
-		public List<MultipartNamedStubMatcher> named = new ArrayList<MultipartNamedStubMatcher>();
+		public List<MultipartNamedStubMatcher> named = new ArrayList<>();
 
 		@Override
 		public boolean equals(Object o) {
@@ -629,19 +629,19 @@ public class YamlContract {
 	public enum PredefinedRegex {
 
 		only_alpha_unicode, number, any_double, any_boolean, ip_address, hostname, email, url, uuid, iso_date,
-		iso_date_time, iso_time, iso_8601_with_offset, non_empty, non_blank;
+		iso_date_time, iso_time, iso_8601_with_offset, non_empty, non_blank
 
 	}
 
 	public enum StubMatcherType {
 
-		by_date, by_time, by_timestamp, by_regex, by_equality, by_type, by_null;
+		by_date, by_time, by_timestamp, by_regex, by_equality, by_type, by_null
 
 	}
 
 	public enum TestMatcherType {
 
-		by_date, by_time, by_timestamp, by_regex, by_equality, by_type, by_command, by_null;
+		by_date, by_time, by_timestamp, by_regex, by_equality, by_type, by_command, by_null
 
 	}
 
@@ -649,9 +649,9 @@ public class YamlContract {
 
 		public int status;
 
-		public Map<String, Object> headers = new LinkedHashMap<String, Object>();
+		public Map<String, Object> headers = new LinkedHashMap<>();
 
-		public Map<String, Object> cookies = new LinkedHashMap<String, Object>();
+		public Map<String, Object> cookies = new LinkedHashMap<>();
 
 		public Object body;
 
@@ -700,11 +700,11 @@ public class YamlContract {
 
 	public static class TestMatchers {
 
-		public List<BodyTestMatcher> body = new ArrayList<BodyTestMatcher>();
+		public List<BodyTestMatcher> body = new ArrayList<>();
 
-		public List<TestHeaderMatcher> headers = new ArrayList<TestHeaderMatcher>();
+		public List<TestHeaderMatcher> headers = new ArrayList<>();
 
-		public List<TestCookieMatcher> cookies = new ArrayList<TestCookieMatcher>();
+		public List<TestCookieMatcher> cookies = new ArrayList<>();
 
 		@Override
 		public boolean equals(Object o) {
@@ -765,7 +765,7 @@ public class YamlContract {
 
 		public String sentTo;
 
-		public Map<String, Object> headers = new LinkedHashMap<String, Object>();
+		public Map<String, Object> headers = new LinkedHashMap<>();
 
 		public Object body;
 

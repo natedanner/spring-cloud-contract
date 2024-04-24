@@ -53,10 +53,10 @@ class StubConfigurationSpec extends Specification {
 			result == stubConfiguration.isVersionChanging()
 		where:
 			ivy                                       || result
-			'group:artifact:1.0.0.RELEASE:classifier' || false
-			'group:artifact:1.0.0.BUILD-SNAPSHOT:'    || true
-			'group:artifact:1.0.0.SNAPSHOT'           || true
-			'group:artifact:+:'                       || true
+			'group:artifact:1.0.0.RELEASE:classifier'
+			true
+			true
+			true
 
 	}
 

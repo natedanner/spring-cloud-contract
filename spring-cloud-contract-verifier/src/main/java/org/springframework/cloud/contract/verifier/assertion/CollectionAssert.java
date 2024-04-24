@@ -79,7 +79,7 @@ public class CollectionAssert<ELEMENT> extends IterableAssert<ELEMENT> {
 	public CollectionAssert<ELEMENT> hasFlattenedSizeGreaterThanOrEqualTo(int size) {
 		isNotNull();
 		int flattenedSize = flattenedSize(0, this.actual);
-		if (!(flattenedSize >= size)) {
+		if (flattenedSize < size) {
 			failWithMessage("The flattened size <%s> is not greater or equal to <%s>", flattenedSize, size);
 		}
 		return this;
@@ -95,7 +95,7 @@ public class CollectionAssert<ELEMENT> extends IterableAssert<ELEMENT> {
 	public CollectionAssert<ELEMENT> hasFlattenedSizeLessThanOrEqualTo(int size) {
 		isNotNull();
 		int flattenedSize = flattenedSize(0, this.actual);
-		if (!(flattenedSize <= size)) {
+		if (flattenedSize > size) {
 			failWithMessage("The flattened size <%s> is not less or equal to <%s>", flattenedSize, size);
 		}
 		return this;
@@ -127,7 +127,7 @@ public class CollectionAssert<ELEMENT> extends IterableAssert<ELEMENT> {
 	public CollectionAssert<ELEMENT> hasSizeGreaterThanOrEqualTo(int size) {
 		isNotNull();
 		int actualSize = size(this.actual);
-		if (!(actualSize >= size)) {
+		if (actualSize < size) {
 			failWithMessage("The size <%s> is not greater or equal to <%s>", actualSize, size);
 		}
 		return this;
@@ -141,7 +141,7 @@ public class CollectionAssert<ELEMENT> extends IterableAssert<ELEMENT> {
 	public CollectionAssert<ELEMENT> hasSizeLessThanOrEqualTo(int size) {
 		isNotNull();
 		int actualSize = size(this.actual);
-		if (!(actualSize <= size)) {
+		if (actualSize > size) {
 			failWithMessage("The size <%s> is not less or equal to <%s>", actualSize, size);
 		}
 		return this;
@@ -174,7 +174,7 @@ public class CollectionAssert<ELEMENT> extends IterableAssert<ELEMENT> {
 			return counter + ((Map) object).size();
 		}
 		if (object instanceof Iterator) {
-			Iterator iterator = ((Iterator) object);
+			Iterator iterator = (Iterator) object;
 			while (iterator.hasNext()) {
 				Object next = iterator.next();
 				counter = flattenedSize(counter, next);

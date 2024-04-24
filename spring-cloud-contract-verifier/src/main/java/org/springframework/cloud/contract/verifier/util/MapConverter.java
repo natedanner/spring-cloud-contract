@@ -54,7 +54,7 @@ public class MapConverter {
 	/**
 	 * Generic {@link Function} used to deserialize a json file.
 	 */
-	public static final Function<String, Object> JSON_PARSING_FUNCTION = (value) -> {
+	public static final Function<String, Object> JSON_PARSING_FUNCTION = value -> {
 		try {
 			return new ObjectMapper().readValue(value, Object.class);
 		}
@@ -66,7 +66,7 @@ public class MapConverter {
 	/**
 	 * Generic {@link Closure} used to deserialize a json file.
 	 */
-	public static final Closure<Object> JSON_PARSING_CLOSURE = new Closure<Object>(null) {
+	public static final Closure<Object> JSON_PARSING_CLOSURE = new Closure<>(null) {
 		public Object doCall(Object it) {
 			return new JsonSlurper().parseText((String) it);
 		}
@@ -77,7 +77,7 @@ public class MapConverter {
 	 * used as the return type is Function&lt;T,T&gt;, whilst this function return type is
 	 * Function&lt;T,R&gt;
 	 */
-	public static final Function<String, Object> IDENTITY = (value) -> value;
+	public static final Function<String, Object> IDENTITY = value -> value;
 
 	private final TemplateProcessor templateProcessor;
 
@@ -94,7 +94,7 @@ public class MapConverter {
 	 * {@link org.springframework.cloud.contract.spec.internal.DslProperty}
 	 */
 	public static Object transformToClientValues(Object value) {
-		return transformValues(value, (v) -> v instanceof DslProperty ? ((DslProperty<?>) v).getClientValue() : v);
+		return transformValues(value, v -> v instanceof DslProperty ? ((DslProperty<?>) v).getClientValue() : v);
 	}
 
 	public static Object transformValues(Object value, Function<Object, ?> function) {
@@ -126,7 +126,7 @@ public class MapConverter {
 			return convert((Map) value, function, parsingFunction);
 		}
 		else if (value instanceof Collection) {
-			return ((Collection) value).stream().map((v) -> transformValues(v, function, parsingFunction))
+			return ((Collection) value).stream().map(v -> transformValues(v, function, parsingFunction))
 					.collect(Collectors.toList());
 		}
 		return transformValue(function, value, parsingFunction);
@@ -138,7 +138,7 @@ public class MapConverter {
 	 */
 	protected static Object transformValue(Function<Object, ?> function, Object value,
 			Function<String, Object> parsingFunction) {
-		return extractValue(value, (val) -> {
+		return extractValue(value, val -> {
 			Object newValue = function.apply(val);
 			if (newValue instanceof Map || newValue instanceof List || newValue instanceof String && val != null) {
 				return transformValues(newValue, function, parsingFunction);
@@ -177,7 +177,7 @@ public class MapConverter {
 			Function<String, Object> parsingFunction) {
 		return transformValues(json, val -> {
 			if (val instanceof DslProperty) {
-				DslProperty<?> dslProperty = ((DslProperty<?>) val);
+				DslProperty<?> dslProperty = (DslProperty<?>) val;
 				return clientSide
 						? getClientOrServerSideValues(dslProperty.getClientValue(), clientSide, parsingFunction)
 						: getClientOrServerSideValues(dslProperty.getServerValue(), clientSide, parsingFunction);
@@ -186,7 +186,7 @@ public class MapConverter {
 				ContentType type = new MapConverter().templateProcessor.containsJsonPathTemplateEntry(
 						ContentUtils.extractValueForGString((GString) val, ContentUtils.GET_TEST_SIDE).toString())
 								? ContentType.TEXT : null;
-				return ContentUtils.extractValue((GString) val, type, (v) -> {
+				return ContentUtils.extractValue((GString) val, type, v -> {
 					if (v instanceof DslProperty) {
 						return clientSide
 								? getClientOrServerSideValues(((DslProperty<?>) v).getClientValue(), clientSide,

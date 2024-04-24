@@ -282,7 +282,7 @@ public class Common {
 		else if ((firstSide instanceof Pattern || firstSide instanceof RegexProperty) && secondSide instanceof String) {
 			Pattern pattern = firstSide instanceof Pattern ? (Pattern) firstSide
 					: ((RegexProperty) firstSide).getPattern();
-			assertThat(((String) secondSide).toString().matches(pattern.pattern()),
+			assertThat(((String) secondSide).matches(pattern.pattern()),
 					"Pattern [" + pattern.pattern() + "] is not matched by [" + secondSide.toString() + "]");
 		}
 		else if ((secondSide instanceof Pattern || secondSide instanceof RegexProperty)

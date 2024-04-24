@@ -86,8 +86,8 @@ public class ContractExchangeHandler extends WireMockVerifyHelper<EntityExchange
 		ReflectionUtils.makeAccessible(field);
 		String index = result.getRequestHeaders().getFirst(WebTestClient.WEBTESTCLIENT_REQUEST_ID);
 		@SuppressWarnings("unchecked")
-		Map<String, Object> map = (((Map<String, Map<String, Object>>) ReflectionUtils.getField(field, null))
-				.get(index));
+		Map<String, Object> map = ((Map<String, Map<String, Object>>) ReflectionUtils.getField(field, null))
+				.get(index);
 		if (map == null) {
 			return new HashMap<>();
 		}
@@ -115,7 +115,7 @@ class WireMockHttpRequestAdapter implements Request {
 
 	private static final boolean SERVLET_API_PRESENT = ClassUtils.isPresent("jakarta.servlet.http.Part", null);
 
-	private EntityExchangeResult<?> result;
+	private final EntityExchangeResult<?> result;
 
 	WireMockHttpRequestAdapter(EntityExchangeResult<?> result) {
 		this.result = result;
@@ -268,7 +268,7 @@ class WireMockHttpRequestAdapter implements Request {
 				.content(this.result.getRequestBodyContent()).buildRequest(new MockServletContext());
 		try {
 			return new StandardMultipartHttpServletRequest(request).getParts().stream()
-					.map(part -> partFromServletPart(part)).collect(Collectors.toList());
+					.map(this::partFromServletPart).collect(Collectors.toList());
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(e);

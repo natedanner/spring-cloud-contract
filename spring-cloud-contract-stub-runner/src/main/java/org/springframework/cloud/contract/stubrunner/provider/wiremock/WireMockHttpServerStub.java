@@ -74,7 +74,7 @@ public class WireMockHttpServerStub implements HttpServerStub {
 
 	private WireMockServer wireMockServer;
 
-	private boolean https = false;
+	private boolean https;
 
 	private WireMockConfiguration wireMockConfiguration;
 

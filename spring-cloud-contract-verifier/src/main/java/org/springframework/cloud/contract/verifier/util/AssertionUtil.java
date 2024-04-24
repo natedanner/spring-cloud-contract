@@ -21,7 +21,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 
 public final class AssertionUtil {
 
-	private static boolean NON_STRICT = false;
+	private static boolean nonStrict;
 
 	private AssertionUtil() {
 		throw new IllegalStateException("You shouldn't instantiate the utility class");
@@ -29,7 +29,7 @@ public final class AssertionUtil {
 
 	public static void assertThatJsonsAreEqual(String expected, String actual) {
 		try {
-			JSONAssert.assertEquals(expected, actual, NON_STRICT);
+			JSONAssert.assertEquals(expected, actual, nonStrict);
 		}
 		catch (JSONException ex) {
 			throw new IllegalStateException(ex);

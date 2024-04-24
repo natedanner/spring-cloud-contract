@@ -425,9 +425,9 @@ class WireMockProperties {
 
 		private String[] files = new String[0];
 
-		private boolean portDynamic = false;
+		private boolean portDynamic;
 
-		private boolean httpsPortDynamic = false;
+		private boolean httpsPortDynamic;
 
 		public int getPort() {
 			return this.port;
